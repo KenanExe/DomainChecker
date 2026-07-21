@@ -46,16 +46,16 @@
             groupBox2 = new GroupBox();
             textBox1 = new TextBox();
             groupBox3 = new GroupBox();
-            dataGridView1 = new DataGridView();
+            dataQueue = new DataGridView();
             groupBox4 = new GroupBox();
-            dataGridView2 = new DataGridView();
+            dataResults = new DataGridView();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SpeedScrol).BeginInit();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataQueue).BeginInit();
             groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataResults).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -152,6 +152,7 @@
             checkCom.TabIndex = 2;
             checkCom.Text = ".com";
             checkCom.UseVisualStyleBackColor = true;
+            checkCom.CheckedChanged += checkCom_CheckedChanged;
             // 
             // checkGov
             // 
@@ -208,6 +209,7 @@
             btnStart.TabIndex = 2;
             btnStart.Text = "Start Checking";
             btnStart.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
             // 
             // progressBar
             // 
@@ -245,16 +247,18 @@
             // 
             // textBox1
             // 
+            textBox1.BackColor = Color.WhiteSmoke;
             textBox1.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 162);
             textBox1.Location = new Point(6, 29);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(234, 309);
             textBox1.TabIndex = 0;
+            textBox1.Text = "KenanExe.xyz\r\nGoogle.com";
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(dataGridView1);
+            groupBox3.Controls.Add(dataQueue);
             groupBox3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             groupBox3.Location = new Point(279, 403);
             groupBox3.Name = "groupBox3";
@@ -263,19 +267,20 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Processing Queue (Active)";
             // 
-            // dataGridView1
+            // dataQueue
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 29);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(234, 163);
-            dataGridView1.TabIndex = 0;
+            dataQueue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataQueue.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataQueue.Location = new Point(6, 29);
+            dataQueue.Name = "dataQueue";
+            dataQueue.RowHeadersWidth = 51;
+            dataQueue.Size = new Size(234, 163);
+            dataQueue.TabIndex = 0;
             // 
             // groupBox4
             // 
             groupBox4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox4.Controls.Add(dataGridView2);
+            groupBox4.Controls.Add(dataResults);
             groupBox4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             groupBox4.Location = new Point(542, 35);
             groupBox4.Name = "groupBox4";
@@ -284,15 +289,15 @@
             groupBox4.TabStop = false;
             groupBox4.Text = "Results";
             // 
-            // dataGridView2
+            // dataResults
             // 
-            dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(6, 29);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(660, 531);
-            dataGridView2.TabIndex = 0;
+            dataResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataResults.Location = new Point(6, 29);
+            dataResults.Name = "dataResults";
+            dataResults.RowHeadersWidth = 51;
+            dataResults.Size = new Size(660, 531);
+            dataResults.TabIndex = 0;
             // 
             // Form1
             // 
@@ -316,9 +321,9 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataQueue).EndInit();
             groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataResults).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -342,9 +347,9 @@
         private Button btnThema;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private DataGridView dataGridView1;
+        private DataGridView dataQueue;
         private TextBox textBox1;
         private GroupBox groupBox4;
-        private DataGridView dataGridView2;
+        private DataGridView dataResults;
     }
 }

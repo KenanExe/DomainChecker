@@ -1,3 +1,6 @@
+using System.Data.SQLite;
+using System.Windows.Forms;
+
 namespace DomainChecker
 {
     public partial class Form1 : Form
@@ -9,7 +12,9 @@ namespace DomainChecker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            dataQueue.Columns.Add("Name", "Name");
+            dataResults.Columns.Add("Name", "Name");
+            dataResults.Columns.Add("Status", "Status");
         }
         int speed = 1000;
         bool theme = false;
@@ -88,11 +93,17 @@ namespace DomainChecker
             label2.ForeColor = Color.White;
             label3.ForeColor = Color.White;
             lblSpeed.ForeColor = Color.White;
-            groupBox1.ForeColor = Color.White;
             btnThema.ForeColor = Color.FromArgb(255, 109, 109, 109);
             btnThema.BackColor = Color.FromArgb(255, 60, 60, 60);
             SpeedScrol.BackColor = Color.FromArgb(60, 60, 60);
             btnThema.Text = "Change Light Mode";
+            groupBox1.ForeColor = Color.White;
+            groupBox2.ForeColor = Color.White;
+            groupBox3.ForeColor = Color.White;
+            groupBox4.ForeColor = Color.White;
+
+            textBox1.BackColor = Color.FromArgb(60, 60, 60);
+            textBox1.ForeColor = Color.White;
         }
         private void goLight()
         {
@@ -102,11 +113,75 @@ namespace DomainChecker
             label2.ForeColor = Color.Black;
             label3.ForeColor = Color.Black;
             lblSpeed.ForeColor = Color.Black;
-            groupBox1.ForeColor = Color.Black;
             btnThema.ForeColor = Color.FromArgb(255, 109, 109, 109);
             btnThema.BackColor = Color.FromArgb(255, 255, 255, 255);
             SpeedScrol.BackColor = Color.FromArgb(255, 255, 255, 255);
             btnThema.Text = "Change Dark Mode";
+            groupBox1.ForeColor = Color.Black;
+            groupBox2.ForeColor = Color.Black;
+            groupBox3.ForeColor = Color.Black;
+            groupBox4.ForeColor = Color.Black;
+            textBox1.BackColor = Color.WhiteSmoke;
+            textBox1.ForeColor = Color.Black;
         }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            string text = textBox1.Text;
+            string[] lines = text.Split(new[] { "\r\n", "\r", "\n", " " }, StringSplitOptions.None);
+            foreach (string line in lines)
+            {
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    //LoggingService.Log(line);
+                    SqlAddQueue.AddQueue(line);
+                    dataQueue.Rows.Add(line);
+                    CheckingService.StartChecking();
+                    btnStart.Enabled = false;
+                }
+            }
+        }
+
+        private void checkCom_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        /*
+private void DataResultsUpDate()
+{
+   dataResults.Rows.Clear();
+   try
+   {
+       using (SQLiteConnection m_dbConnection = new SQLiteConnection($"Data Source={DbPath};Version=3;"))
+       {
+           try
+           {
+               string Request = "select Categoryid, Description, Importance, Success, id from TblTasks";
+               using (SQLiteCommand command = new SQLiteCommand(Request, m_dbConnection))
+               {
+                   m_dbConnection.Open();
+                   using (SQLiteDataReader reader = command.ExecuteReader())
+                   {
+                       while (reader.Read())
+                       {
+                           dataResults.Rows.Add(DumpData.Categories((int)reader["Categoryid"]), (int)reader["Importance"], reader["Description"], (bool)reader["Success"] ? "\u2714" : "\u2716", reader["id"]);
+                       }
+                   }
+               }
+           }
+           catch (SQLiteException ex)
+           {
+               //update after new log system
+               Log($"DB Error: {ex.Message}");
+           }
+       }
+   }
+   catch (Exception ex)
+   {
+       //update after new log system
+       Log($"System Error: {ex.Message}");
+   }
+}
+*/
     }
 }
