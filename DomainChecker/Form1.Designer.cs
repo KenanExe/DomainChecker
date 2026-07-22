@@ -49,6 +49,7 @@
             dataQueue = new DataGridView();
             groupBox4 = new GroupBox();
             dataResults = new DataGridView();
+            btnRefrash = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SpeedScrol).BeginInit();
             groupBox2.SuspendLayout();
@@ -209,7 +210,7 @@
             btnStart.TabIndex = 2;
             btnStart.Text = "Start Checking";
             btnStart.UseVisualStyleBackColor = false;
-            btnStart.Click += btnStart_Click;
+            btnStart.Click += async (sender, e) => await btnStart_Click(sender, e);
             // 
             // progressBar
             // 
@@ -254,7 +255,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(234, 309);
             textBox1.TabIndex = 0;
-            textBox1.Text = "KenanExe.xyz\r\nGoogle.com";
+            textBox1.Text = "KenanExe.xyz\r\nGoogle.com\r\nKenanExe.com\r\nGithub.io\r\nKenannnnnExe.com";
             // 
             // groupBox3
             // 
@@ -299,11 +300,22 @@
             dataResults.Size = new Size(660, 531);
             dataResults.TabIndex = 0;
             // 
+            // btnRefrash
+            // 
+            btnRefrash.Location = new Point(1114, 12);
+            btnRefrash.Name = "btnRefrash";
+            btnRefrash.Size = new Size(94, 29);
+            btnRefrash.TabIndex = 8;
+            btnRefrash.Text = "Refrash";
+            btnRefrash.UseVisualStyleBackColor = true;
+            btnRefrash.Click += btnRefrash_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1226, 629);
+            Controls.Add(btnRefrash);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
@@ -351,5 +363,6 @@
         private TextBox textBox1;
         private GroupBox groupBox4;
         private DataGridView dataResults;
+        private Button btnRefrash;
     }
 }

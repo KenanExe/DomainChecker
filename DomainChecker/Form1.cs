@@ -1,4 +1,6 @@
+using System.Configuration;
 using System.Data.SQLite;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DomainChecker
@@ -125,7 +127,7 @@ namespace DomainChecker
             textBox1.ForeColor = Color.Black;
         }
 
-        private void btnStart_Click(object sender, EventArgs e)
+        private async Task btnStart_Click(object sender, EventArgs e)
         {
             string text = textBox1.Text;
             string[] lines = text.Split(new[] { "\r\n", "\r", "\n", " " }, StringSplitOptions.None);
@@ -136,9 +138,18 @@ namespace DomainChecker
                     //LoggingService.Log(line);
                     SqlAddQueue.AddQueue(line);
                     dataQueue.Rows.Add(line);
-                    CheckingService.StartChecking();
                     btnStart.Enabled = false;
+                    textBox1.Text = string.Empty;
                 }
+                else if (string.IsNullOrWhiteSpace(line))
+                {
+                    LoggingService.Log("Empty line detected, skipping.");
+                }
+            }
+            bool result = await CheckingService.StartCheckingLoopAsync(speed);
+            if (result)
+            {
+                btnStart.Enabled = true;
             }
         }
 
@@ -146,42 +157,52 @@ namespace DomainChecker
         {
 
         }
-        /*
-private void DataResultsUpDate()
-{
-   dataResults.Rows.Clear();
-   try
-   {
-       using (SQLiteConnection m_dbConnection = new SQLiteConnection($"Data Source={DbPath};Version=3;"))
-       {
-           try
-           {
-               string Request = "select Categoryid, Description, Importance, Success, id from TblTasks";
-               using (SQLiteCommand command = new SQLiteCommand(Request, m_dbConnection))
-               {
-                   m_dbConnection.Open();
-                   using (SQLiteDataReader reader = command.ExecuteReader())
-                   {
-                       while (reader.Read())
-                       {
-                           dataResults.Rows.Add(DumpData.Categories((int)reader["Categoryid"]), (int)reader["Importance"], reader["Description"], (bool)reader["Success"] ? "\u2714" : "\u2716", reader["id"]);
-                       }
-                   }
-               }
-           }
-           catch (SQLiteException ex)
-           {
-               //update after new log system
-               Log($"DB Error: {ex.Message}");
-           }
-       }
-   }
-   catch (Exception ex)
-   {
-       //update after new log system
-       Log($"System Error: {ex.Message}");
-   }
-}
-*/
+        public void DataResultsUpDate()
+        {
+            dataResults.Rows.Clear();
+            string dbPath = ConfigurationManager.AppSettings["DbPath"];
+            try
+            {
+                using (SQLiteConnection m_dbConnection = new SQLiteConnection($"Data Source={dbPath};Version=3;"))
+                {
+                    try
+                    {
+                        string Request = "select name, status from TblResults";
+                        using (SQLiteCommand command = new SQLiteCommand(Request, m_dbConnection))
+                        {
+                            m_dbConnection.Open();
+                            using (SQLiteDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    DataResultsAdd(
+                                        reader["name"].ToString(),
+                                        (bool)reader["status"]
+                                    );
+                                }
+                            }
+                        }
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        LoggingService.Log($"DB Error: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggingService.Log($"System Error: {ex.Message}");
+            }
+        }
+
+        public void DataResultsAdd(string name, bool status)
+        {
+            dataResults.Rows.Add(name, status ? "\u2714" : "\u2716");
+        }
+
+        private void btnRefrash_Click(object sender, EventArgs e)
+        {
+            DataResultsUpDate();
+        }
     }
 }
