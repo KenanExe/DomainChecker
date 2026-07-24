@@ -2,6 +2,7 @@ using System.Configuration;
 using System.Data.SQLite;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace DomainChecker
 {
@@ -146,11 +147,22 @@ namespace DomainChecker
                     LoggingService.Log("Empty line detected, skipping.");
                 }
             }
+            Task refreshTask = ReFrash();
+
             bool result = await CheckingService.StartCheckingLoopAsync(speed);
             if (result)
             {
                 btnStart.Enabled = true;
             }
+        }
+        private async Task ReFrash(){ // i will change this to better way in the future
+            DataResultsUpDate();
+            while (!btnStart.Enabled)
+            {
+                DataResultsUpDate();
+            await Task.Delay(speed + 100);
+            }
+            DataResultsUpDate();
         }
 
         private void checkCom_CheckedChanged(object sender, EventArgs e)

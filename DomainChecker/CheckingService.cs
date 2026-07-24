@@ -23,7 +23,7 @@ namespace DomainChecker
                 {
                     break;
                 }
-                await Task.Delay(time); // Thread.Sleep yerine await Task.Delay -> UI thread'i bloklamaz
+                await Task.Delay(time); // I still learning async/await
             }
             return true;
         }
