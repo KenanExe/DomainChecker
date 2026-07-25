@@ -210,7 +210,7 @@
             btnStart.TabIndex = 2;
             btnStart.Text = "Start Checking";
             btnStart.UseVisualStyleBackColor = false;
-            btnStart.Click += async (sender, e) => await btnStart_Click(sender, e);
+            btnStart.Click += btnStart_Click;
             // 
             // progressBar
             // 
@@ -302,6 +302,7 @@
             // 
             // btnRefrash
             // 
+            btnRefrash.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             btnRefrash.Location = new Point(1114, 12);
             btnRefrash.Name = "btnRefrash";
             btnRefrash.Size = new Size(94, 29);
@@ -362,7 +363,7 @@
         private DataGridView dataQueue;
         private TextBox textBox1;
         private GroupBox groupBox4;
-        private DataGridView dataResults;
         private Button btnRefrash;
+        public static DataGridView dataResults;
     }
 }

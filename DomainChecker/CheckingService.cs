@@ -14,17 +14,20 @@ namespace DomainChecker
     {
         static bool DebugMode = ConfigurationManager.AppSettings["DebugMode"] == "true";
         // To Do: Make a loop for checking all items in the queue and add a delay between each check
-        public static async Task<bool> StartCheckingLoopAsync(int time)
+        public static async Task<bool> StartCheckingLoopAsync()
         {
             while (true)
             {
+                int time = GetSpeed();
                 bool result = await StartCheckingAsync();
                 if (!result)
                 {
                     break;
                 }
+                DataResultsUpDate();
                 await Task.Delay(time); // I still learning async/await
             }
+            DataResultsUpDate();
             return true;
         }
 

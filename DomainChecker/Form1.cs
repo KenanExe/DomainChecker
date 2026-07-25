@@ -18,8 +18,19 @@ namespace DomainChecker
             dataQueue.Columns.Add("Name", "Name");
             dataResults.Columns.Add("Name", "Name");
             dataResults.Columns.Add("Status", "Status");
+
+
+            dataResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataResults.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataResults.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataResults.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataResults.Columns[1].Width = 80;
         }
-        int speed = 1000;
+        static int speed = 1000;
+        static public int GetSpeed()
+        {
+            return speed;
+        }
         bool theme = false;
         private void SpeedScrol_Scroll(object sender, EventArgs e)
         {
@@ -128,7 +139,7 @@ namespace DomainChecker
             textBox1.ForeColor = Color.Black;
         }
 
-        private async Task btnStart_Click(object sender, EventArgs e)
+        private async void btnStart_Click(object sender, EventArgs e)
         {
             string text = textBox1.Text;
             string[] lines = text.Split(new[] { "\r\n", "\r", "\n", " " }, StringSplitOptions.None);
@@ -138,7 +149,7 @@ namespace DomainChecker
                 {
                     //LoggingService.Log(line);
                     SqlAddQueue.AddQueue(line);
-                    dataQueue.Rows.Add(line);
+                    dataQueue.Rows.Add(line); //To Do: Change this to a method that updates the DataGridView from the db
                     btnStart.Enabled = false;
                     textBox1.Text = string.Empty;
                 }
@@ -147,29 +158,18 @@ namespace DomainChecker
                     LoggingService.Log("Empty line detected, skipping.");
                 }
             }
-            Task refreshTask = ReFrash();
-
-            bool result = await CheckingService.StartCheckingLoopAsync(speed);
+            bool result = await CheckingService.StartCheckingLoopAsync();
             if (result)
             {
                 btnStart.Enabled = true;
             }
-        }
-        private async Task ReFrash(){ // i will change this to better way in the future
-            DataResultsUpDate();
-            while (!btnStart.Enabled)
-            {
-                DataResultsUpDate();
-            await Task.Delay(speed + 100);
-            }
-            DataResultsUpDate();
         }
 
         private void checkCom_CheckedChanged(object sender, EventArgs e)
         {
 
         }
-        public void DataResultsUpDate()
+        public static void DataResultsUpDate()
         {
             dataResults.Rows.Clear();
             string dbPath = ConfigurationManager.AppSettings["DbPath"];
@@ -207,9 +207,21 @@ namespace DomainChecker
             }
         }
 
-        public void DataResultsAdd(string name, bool status)
+        public static void DataResultsAdd(string name, bool status)
         {
-            dataResults.Rows.Add(name, status ? "\u2714" : "\u2716");
+            int rowIndex = dataResults.Rows.Add(name, status ? "\u2714" : "\u2716");
+            var statusCell = dataResults.Rows[rowIndex].Cells[1];
+
+            if (status)
+            {
+                statusCell.Style.BackColor = Color.LightGreen;
+                statusCell.Style.ForeColor = Color.DarkGreen;
+            }
+            else
+            {
+                statusCell.Style.BackColor = Color.MistyRose;
+                statusCell.Style.ForeColor = Color.DarkRed;
+            }
         }
 
         private void btnRefrash_Click(object sender, EventArgs e)
