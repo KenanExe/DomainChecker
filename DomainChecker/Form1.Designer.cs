@@ -72,9 +72,11 @@
             groupBox1.Controls.Add(checkOrg);
             groupBox1.Controls.Add(checkNet);
             groupBox1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            groupBox1.Location = new Point(12, 35);
+            groupBox1.Location = new Point(10, 26);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(246, 344);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(215, 258);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Auto TLDs";
@@ -83,9 +85,9 @@
             // 
             lblSpeed.AutoSize = true;
             lblSpeed.Font = new Font("Segoe UI", 9F);
-            lblSpeed.Location = new Point(6, 313);
+            lblSpeed.Location = new Point(5, 235);
             lblSpeed.Name = "lblSpeed";
-            lblSpeed.Size = new Size(136, 20);
+            lblSpeed.Size = new Size(107, 15);
             lblSpeed.TabIndex = 10;
             lblSpeed.Text = "Speed: 1.0 Seconds";
             // 
@@ -93,21 +95,22 @@
             // 
             SpeedScrol.BackColor = SystemColors.Control;
             SpeedScrol.LargeChange = 1;
-            SpeedScrol.Location = new Point(6, 268);
+            SpeedScrol.Location = new Point(5, 201);
+            SpeedScrol.Margin = new Padding(3, 2, 3, 2);
             SpeedScrol.Minimum = 1;
             SpeedScrol.Name = "SpeedScrol";
-            SpeedScrol.Size = new Size(234, 56);
+            SpeedScrol.Size = new Size(205, 45);
             SpeedScrol.TabIndex = 9;
-            SpeedScrol.Value = 3;
+            SpeedScrol.Value = 4;
             SpeedScrol.Scroll += SpeedScrol_Scroll;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            label3.Location = new Point(6, 242);
+            label3.Location = new Point(5, 182);
             label3.Name = "label3";
-            label3.Size = new Size(146, 23);
+            label3.Size = new Size(118, 19);
             label3.TabIndex = 8;
             label3.Text = "Check Frequency:";
             // 
@@ -115,9 +118,10 @@
             // 
             checkAi.AutoSize = true;
             checkAi.Font = new Font("Segoe UI", 9F);
-            checkAi.Location = new Point(6, 210);
+            checkAi.Location = new Point(5, 158);
+            checkAi.Margin = new Padding(3, 2, 3, 2);
             checkAi.Name = "checkAi";
-            checkAi.Size = new Size(46, 24);
+            checkAi.Size = new Size(38, 19);
             checkAi.TabIndex = 7;
             checkAi.Text = ".ai";
             checkAi.UseVisualStyleBackColor = true;
@@ -126,9 +130,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            label2.Location = new Point(6, 37);
+            label2.Location = new Point(5, 28);
             label2.Name = "label2";
-            label2.Size = new Size(111, 23);
+            label2.Size = new Size(93, 19);
             label2.TabIndex = 2;
             label2.Text = "Include TLDs:";
             // 
@@ -136,9 +140,10 @@
             // 
             checkio.AutoSize = true;
             checkio.Font = new Font("Segoe UI", 9F);
-            checkio.Location = new Point(6, 180);
+            checkio.Location = new Point(5, 135);
+            checkio.Margin = new Padding(3, 2, 3, 2);
             checkio.Name = "checkio";
-            checkio.Size = new Size(47, 24);
+            checkio.Size = new Size(39, 19);
             checkio.TabIndex = 6;
             checkio.Text = ".io";
             checkio.UseVisualStyleBackColor = true;
@@ -147,9 +152,10 @@
             // 
             checkCom.AutoSize = true;
             checkCom.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            checkCom.Location = new Point(6, 60);
+            checkCom.Location = new Point(5, 45);
+            checkCom.Margin = new Padding(3, 2, 3, 2);
             checkCom.Name = "checkCom";
-            checkCom.Size = new Size(63, 24);
+            checkCom.Size = new Size(53, 19);
             checkCom.TabIndex = 2;
             checkCom.Text = ".com";
             checkCom.UseVisualStyleBackColor = true;
@@ -159,9 +165,10 @@
             // 
             checkGov.AutoSize = true;
             checkGov.Font = new Font("Segoe UI", 9F);
-            checkGov.Location = new Point(6, 150);
+            checkGov.Location = new Point(5, 112);
+            checkGov.Margin = new Padding(3, 2, 3, 2);
             checkGov.Name = "checkGov";
-            checkGov.Size = new Size(59, 24);
+            checkGov.Size = new Size(49, 19);
             checkGov.TabIndex = 5;
             checkGov.Text = ".gov";
             checkGov.UseVisualStyleBackColor = true;
@@ -170,9 +177,10 @@
             // 
             checkOrg.AutoSize = true;
             checkOrg.Font = new Font("Segoe UI", 9F);
-            checkOrg.Location = new Point(6, 90);
+            checkOrg.Location = new Point(5, 68);
+            checkOrg.Margin = new Padding(3, 2, 3, 2);
             checkOrg.Name = "checkOrg";
-            checkOrg.Size = new Size(57, 24);
+            checkOrg.Size = new Size(47, 19);
             checkOrg.TabIndex = 3;
             checkOrg.Text = ".org";
             checkOrg.UseVisualStyleBackColor = true;
@@ -181,9 +189,10 @@
             // 
             checkNet.AutoSize = true;
             checkNet.Font = new Font("Segoe UI", 9F);
-            checkNet.Location = new Point(6, 120);
+            checkNet.Location = new Point(5, 90);
+            checkNet.Margin = new Padding(3, 2, 3, 2);
             checkNet.Name = "checkNet";
-            checkNet.Size = new Size(55, 24);
+            checkNet.Size = new Size(46, 19);
             checkNet.TabIndex = 4;
             checkNet.Text = ".net";
             checkNet.UseVisualStyleBackColor = true;
@@ -192,9 +201,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(10, 7);
             label1.Name = "label1";
-            label1.Size = new Size(175, 23);
+            label1.Size = new Size(144, 19);
             label1.TabIndex = 1;
             label1.Text = "Domain Hunter V0.1";
             // 
@@ -204,9 +213,10 @@
             btnStart.FlatStyle = FlatStyle.Flat;
             btnStart.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
             btnStart.ForeColor = SystemColors.ControlLightLight;
-            btnStart.Location = new Point(12, 403);
+            btnStart.Location = new Point(10, 302);
+            btnStart.Margin = new Padding(3, 2, 3, 2);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(246, 66);
+            btnStart.Size = new Size(215, 50);
             btnStart.TabIndex = 2;
             btnStart.Text = "Start Checking";
             btnStart.UseVisualStyleBackColor = false;
@@ -215,9 +225,10 @@
             // progressBar
             // 
             progressBar.BackColor = SystemColors.Control;
-            progressBar.Location = new Point(12, 481);
+            progressBar.Location = new Point(10, 361);
+            progressBar.Margin = new Padding(3, 2, 3, 2);
             progressBar.Name = "progressBar";
-            progressBar.Size = new Size(246, 29);
+            progressBar.Size = new Size(215, 22);
             progressBar.TabIndex = 3;
             progressBar.UseWaitCursor = true;
             progressBar.Value = 10;
@@ -227,9 +238,10 @@
             btnThema.FlatStyle = FlatStyle.Flat;
             btnThema.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold);
             btnThema.ForeColor = SystemColors.GrayText;
-            btnThema.Location = new Point(12, 535);
+            btnThema.Location = new Point(10, 401);
+            btnThema.Margin = new Padding(3, 2, 3, 2);
             btnThema.Name = "btnThema";
-            btnThema.Size = new Size(246, 66);
+            btnThema.Size = new Size(215, 50);
             btnThema.TabIndex = 4;
             btnThema.Text = "Change Dark Mode";
             btnThema.UseVisualStyleBackColor = false;
@@ -239,9 +251,11 @@
             // 
             groupBox2.Controls.Add(textBox1);
             groupBox2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            groupBox2.Location = new Point(279, 35);
+            groupBox2.Location = new Point(244, 26);
+            groupBox2.Margin = new Padding(3, 2, 3, 2);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(246, 344);
+            groupBox2.Padding = new Padding(3, 2, 3, 2);
+            groupBox2.Size = new Size(215, 258);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Doamin List (input)";
@@ -250,10 +264,11 @@
             // 
             textBox1.BackColor = Color.WhiteSmoke;
             textBox1.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 162);
-            textBox1.Location = new Point(6, 29);
+            textBox1.Location = new Point(5, 22);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(234, 309);
+            textBox1.Size = new Size(205, 233);
             textBox1.TabIndex = 0;
             textBox1.Text = "KenanExe.xyz\r\nGoogle.com\r\nKenanExe.com\r\nGithub.io\r\nKenannnnnExe.com";
             // 
@@ -261,9 +276,11 @@
             // 
             groupBox3.Controls.Add(dataQueue);
             groupBox3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            groupBox3.Location = new Point(279, 403);
+            groupBox3.Location = new Point(244, 302);
+            groupBox3.Margin = new Padding(3, 2, 3, 2);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(246, 198);
+            groupBox3.Padding = new Padding(3, 2, 3, 2);
+            groupBox3.Size = new Size(215, 148);
             groupBox3.TabIndex = 6;
             groupBox3.TabStop = false;
             groupBox3.Text = "Processing Queue (Active)";
@@ -272,10 +289,11 @@
             // 
             dataQueue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataQueue.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataQueue.Location = new Point(6, 29);
+            dataQueue.Location = new Point(5, 22);
+            dataQueue.Margin = new Padding(3, 2, 3, 2);
             dataQueue.Name = "dataQueue";
             dataQueue.RowHeadersWidth = 51;
-            dataQueue.Size = new Size(234, 163);
+            dataQueue.Size = new Size(205, 122);
             dataQueue.TabIndex = 0;
             // 
             // groupBox4
@@ -283,9 +301,11 @@
             groupBox4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox4.Controls.Add(dataResults);
             groupBox4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            groupBox4.Location = new Point(542, 35);
+            groupBox4.Location = new Point(474, 26);
+            groupBox4.Margin = new Padding(3, 2, 3, 2);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(672, 566);
+            groupBox4.Padding = new Padding(3, 2, 3, 2);
+            groupBox4.Size = new Size(588, 424);
             groupBox4.TabIndex = 7;
             groupBox4.TabStop = false;
             groupBox4.Text = "Results";
@@ -294,18 +314,20 @@
             // 
             dataResults.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataResults.Location = new Point(6, 29);
+            dataResults.Location = new Point(5, 22);
+            dataResults.Margin = new Padding(3, 2, 3, 2);
             dataResults.Name = "dataResults";
             dataResults.RowHeadersWidth = 51;
-            dataResults.Size = new Size(660, 531);
+            dataResults.Size = new Size(578, 398);
             dataResults.TabIndex = 0;
             // 
             // btnRefrash
             // 
             btnRefrash.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnRefrash.Location = new Point(1114, 12);
+            btnRefrash.Location = new Point(975, 9);
+            btnRefrash.Margin = new Padding(3, 2, 3, 2);
             btnRefrash.Name = "btnRefrash";
-            btnRefrash.Size = new Size(94, 29);
+            btnRefrash.Size = new Size(82, 22);
             btnRefrash.TabIndex = 8;
             btnRefrash.Text = "Refrash";
             btnRefrash.UseVisualStyleBackColor = true;
@@ -313,9 +335,9 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1226, 629);
+            ClientSize = new Size(1073, 472);
             Controls.Add(btnRefrash);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
@@ -325,6 +347,7 @@
             Controls.Add(btnStart);
             Controls.Add(groupBox1);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;

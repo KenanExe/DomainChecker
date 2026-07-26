@@ -13,7 +13,6 @@ namespace DomainChecker
     internal class CheckingService
     {
         static bool DebugMode = ConfigurationManager.AppSettings["DebugMode"] == "true";
-        // To Do: Make a loop for checking all items in the queue and add a delay between each check
         public static async Task<bool> StartCheckingLoopAsync()
         {
             while (true)
@@ -99,8 +98,8 @@ namespace DomainChecker
 
         static async Task<int> CheckDomainAsync(string domain)
         {
-            //I will add rdap or whois check here in the future
-            return await RdapChecker.CheckDomainAsync(domain); // Change this after try rdap or whois check
+            //I did but .io needs whois check. Rdap doesn't show .io TLD's
+            return await RdapChecker.CheckDomainAsync(domain); // Add whois for .io TLD's and i think .gov too
         }
     }
 }

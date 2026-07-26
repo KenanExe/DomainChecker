@@ -25,6 +25,8 @@ namespace DomainChecker
             dataResults.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dataResults.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataResults.Columns[1].Width = 80;
+
+            DataResultsUpDate();
         }
         static int speed = 1000;
         static public int GetSpeed()
@@ -36,53 +38,53 @@ namespace DomainChecker
         {
             if (SpeedScrol.Value == 1)
             {
-                lblSpeed.Text = "Speed: 0.8 Seconds (Danger)";
-                speed = 800;
+                lblSpeed.Text = "Speed: 0.7 Seconds (Very Danger)";
+                speed = 700;
             }
             else if (SpeedScrol.Value == 2)
             {
-                lblSpeed.Text = "Speed: 0.9 Seconds (Danger)";
-                speed = 900;
+                lblSpeed.Text = "Speed: 0.8 Seconds (Danger)";
+                speed = 800;
             }
             else if (SpeedScrol.Value == 3)
+            {
+                lblSpeed.Text = "Speed: 0.9 Seconds";
+                speed = 900;
+            }
+            else if (SpeedScrol.Value == 4)
             {
                 lblSpeed.Text = "Speed: 1.0 Seconds";
                 speed = 1000;
             }
-            else if (SpeedScrol.Value == 4)
+            else if (SpeedScrol.Value == 5)
             {
                 lblSpeed.Text = "Speed: 1.1 Seconds";
                 speed = 1100;
             }
-            else if (SpeedScrol.Value == 5)
+            else if (SpeedScrol.Value == 6)
             {
                 lblSpeed.Text = "Speed: 1.3 Seconds";
                 speed = 1300;
             }
-            else if (SpeedScrol.Value == 6)
+            else if (SpeedScrol.Value == 7)
             {
                 lblSpeed.Text = "Speed: 1.5 Seconds";
                 speed = 1500;
             }
-            else if (SpeedScrol.Value == 7)
+            else if (SpeedScrol.Value == 8)
             {
                 lblSpeed.Text = "Speed: 2.0 Seconds";
                 speed = 2000;
             }
-            else if (SpeedScrol.Value == 8)
+            else if (SpeedScrol.Value == 9)
             {
                 lblSpeed.Text = "Speed: 2.5 Seconds";
                 speed = 2500;
             }
-            else if (SpeedScrol.Value == 9)
+            else if (SpeedScrol.Value == 10)
             {
                 lblSpeed.Text = "Speed: 5.0 Seconds";
                 speed = 5000;
-            }
-            else if (SpeedScrol.Value == 10)
-            {
-                lblSpeed.Text = "Speed: 10.0 Seconds";
-                speed = 10000;
             }
         }
 
@@ -118,6 +120,7 @@ namespace DomainChecker
 
             textBox1.BackColor = Color.FromArgb(60, 60, 60);
             textBox1.ForeColor = Color.White;
+            
         }
         private void goLight()
         {
@@ -149,6 +152,7 @@ namespace DomainChecker
                 {
                     //LoggingService.Log(line);
                     SqlAddQueue.AddQueue(line);
+                    AutoAddTDLs(line);
                     dataQueue.Rows.Add(line); //To Do: Change this to a method that updates the DataGridView from the db
                     btnStart.Enabled = false;
                     textBox1.Text = string.Empty;
@@ -227,6 +231,43 @@ namespace DomainChecker
         private void btnRefrash_Click(object sender, EventArgs e)
         {
             DataResultsUpDate();
+        }
+        //To Do: add auto restarter affter error (like rate limit)
+        //To Do: results table can's usable on checking.
+
+        void AutoAddTDLs(string name)
+        {
+            int lastDot = name.LastIndexOf('.');
+
+            if (lastDot != -1)
+            {
+                name = name.Substring(0, lastDot);
+            }
+
+            if (checkCom.Checked)
+            {
+                SqlAddQueue.AddQueue(name + ".com");
+            }
+            if (checkOrg.Checked)
+            {
+                SqlAddQueue.AddQueue(name + ".org");
+            }
+            if (checkNet.Checked)
+            {
+                SqlAddQueue.AddQueue(name + ".net");
+            }
+            if (checkGov.Checked)
+            {
+                SqlAddQueue.AddQueue(name + ".gov");
+            }
+            if (checkio.Checked)
+            {
+                SqlAddQueue.AddQueue(name + ".io");
+            }
+            if (checkAi.Checked)
+            {
+                SqlAddQueue.AddQueue(name + ".ai");
+            }
         }
     }
 }
