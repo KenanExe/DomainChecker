@@ -24,9 +24,11 @@ namespace DomainChecker
                     break;
                 }
                 DataResultsUpDate();
+                DataQueueUpDate();
                 await Task.Delay(time); // I still learning async/await
             }
             DataResultsUpDate();
+            DataQueueUpDate();
             return true;
         }
 

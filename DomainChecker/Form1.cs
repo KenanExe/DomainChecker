@@ -26,7 +26,7 @@ namespace DomainChecker
             dataResults.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataResults.Columns[1].Width = 80;
 
-            DataResultsUpDate();
+            btnRefrash.PerformClick();
         }
         static int speed = 1000;
         static public int GetSpeed()
@@ -120,7 +120,7 @@ namespace DomainChecker
 
             textBox1.BackColor = Color.FromArgb(60, 60, 60);
             textBox1.ForeColor = Color.White;
-            
+
         }
         private void goLight()
         {
@@ -146,14 +146,17 @@ namespace DomainChecker
         {
             string text = textBox1.Text;
             string[] lines = text.Split(new[] { "\r\n", "\r", "\n", " " }, StringSplitOptions.None);
+            int i = 0;
+            progressBar.Value = 0;
             foreach (string line in lines)
             {
                 if (!string.IsNullOrWhiteSpace(line))
                 {
+                    i++;
                     //LoggingService.Log(line);
                     SqlAddQueue.AddQueue(line);
                     AutoAddTDLs(line);
-                    dataQueue.Rows.Add(line); //To Do: Change this to a method that updates the DataGridView from the db
+                    //dataQueue.Rows.Add(line);
                     btnStart.Enabled = false;
                     textBox1.Text = string.Empty;
                 }
@@ -162,6 +165,11 @@ namespace DomainChecker
                     LoggingService.Log("Empty line detected, skipping.");
                 }
             }
+            progressBar.Maximum = i;
+            //LoggingService.Log(progressBar.Maximum.ToString());
+            //LoggingService.Log(i.ToString());
+
+            DataQueueUpDate();
             bool result = await CheckingService.StartCheckingLoopAsync();
             if (result)
             {
@@ -173,6 +181,8 @@ namespace DomainChecker
         {
 
         }
+        // To Do: Change this name to something more descriptive.
+        #region DataResults Services
         public static void DataResultsUpDate()
         {
             dataResults.Rows.Clear();
@@ -189,12 +199,26 @@ namespace DomainChecker
                             m_dbConnection.Open();
                             using (SQLiteDataReader reader = command.ExecuteReader())
                             {
+                                int count = 0;
                                 while (reader.Read())
                                 {
+                                    count++;
                                     DataResultsAdd(
                                         reader["name"].ToString(),
                                         (bool)reader["status"]
                                     );
+                                }
+
+                                if (progressBar.InvokeRequired)
+                                {
+                                    progressBar.Invoke(new Action(() =>
+                                        progressBar.Value = Math.Min(count, progressBar.Maximum)));
+                                    StatusBarUpDate(count, progressBar.Maximum);
+                                }
+                                else
+                                {
+                                    progressBar.Value = Math.Min(count, progressBar.Maximum);
+                                    StatusBarUpDate(count, progressBar.Maximum);
                                 }
                             }
                         }
@@ -210,6 +234,64 @@ namespace DomainChecker
                 LoggingService.Log($"System Error: {ex.Message}");
             }
         }
+        #endregion
+        #region DataQueue Services
+
+        public static void DataQueueUpDate()
+        {
+            DataQueueClear();
+            string dbPath = ConfigurationManager.AppSettings["DbPath"];
+            try
+            {
+                using (SQLiteConnection m_dbConnection = new SQLiteConnection($"Data Source={dbPath};Version=3;"))
+                {
+                    try
+                    {
+                        string Request = @"
+                                          SELECT name FROM (
+                                          SELECT name, 1 AS sira FROM (SELECT name FROM TblQueue LIMIT 3)
+                                          UNION ALL
+                                          SELECT '+ ' || (COUNT(*) - 3) || ' Domains' AS name, 2 AS sira 
+                                          FROM TblQueue HAVING COUNT(*) > 3) ORDER BY sira ASC;";
+                        using (SQLiteCommand command = new SQLiteCommand(Request, m_dbConnection))
+                        {
+                            m_dbConnection.Open();
+                            using (SQLiteDataReader reader = command.ExecuteReader())
+                            {
+                                DataQueueClear();
+                                while (reader.Read())
+                                {
+                                    DataQueueAdd(reader["name"].ToString());
+                                }
+                            }
+                        }
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        LoggingService.Log($"DB Error: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggingService.Log($"System Error: {ex.Message}");
+            }
+        }
+        #endregion
+
+        #region DataQueue Services
+        public static void DataQueueAdd(string name)
+        {
+            dataQueue.Rows.Add(name);
+            //LoggingService.Log($"Added to queue: {name}");
+        }
+        public static void DataQueueClear()
+        {
+            dataQueue.Rows.Clear();
+        }
+        #endregion
+
+
 
         public static void DataResultsAdd(string name, bool status)
         {
@@ -230,6 +312,7 @@ namespace DomainChecker
 
         private void btnRefrash_Click(object sender, EventArgs e)
         {
+            DataQueueUpDate();
             DataResultsUpDate();
         }
         //To Do: add auto restarter affter error (like rate limit)
@@ -268,6 +351,12 @@ namespace DomainChecker
             {
                 SqlAddQueue.AddQueue(name + ".ai");
             }
+        }
+        // Alt bar (status bar)
+        private static void StatusBarUpDate(int queueCount, int resultsCount)
+        {
+            string statusText = $"Queue: {queueCount} / {resultsCount}";
+            AltBarStatus.Text = statusText;
         }
     }
 }
