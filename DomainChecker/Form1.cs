@@ -145,7 +145,7 @@ namespace DomainChecker
         private async void btnStart_Click(object sender, EventArgs e)
         {
             string text = textBox1.Text;
-            string[] lines = text.Split(new[] { "\r\n", "\r", "\n", " " }, StringSplitOptions.None);
+            string[] lines = text.Split(new[] { "\r\n", "\r", "\n", " ", "," }, StringSplitOptions.None);
             int i = 0;
             progressBar.Value = 0;
             foreach (string line in lines)
@@ -154,7 +154,7 @@ namespace DomainChecker
                 {
                     i++;
                     //LoggingService.Log(line);
-                    SqlAddQueue.AddQueue(line);
+                    //SqlAddQueue.AddQueue(line);
                     AutoAddTDLs(line);
                     //dataQueue.Rows.Add(line);
                     btnStart.Enabled = false;
@@ -324,7 +324,8 @@ namespace DomainChecker
 
             if (lastDot != -1)
             {
-                name = name.Substring(0, lastDot);
+                SqlAddQueue.AddQueue(name);
+                return;
             }
 
             if (checkCom.Checked)
