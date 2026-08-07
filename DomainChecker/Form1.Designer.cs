@@ -401,10 +401,10 @@
         private GroupBox groupBox4;
         private Button btnRefrash;
         private StatusStrip statusStrip1;
-        private Button ExportBtn;
+        public  static Button ExportBtn;
         private static ToolStripStatusLabel AltBarStatus;
-        public static ProgressBar progressBar;
-        public static DataGridView dataQueue;
-        public static DataGridView dataResults;
+        public  static ProgressBar progressBar;
+        public  static DataGridView dataQueue;
+        public  static DataGridView dataResults;
     }
 }

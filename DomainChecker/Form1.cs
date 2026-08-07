@@ -220,6 +220,7 @@ namespace DomainChecker
                                     progressBar.Value = Math.Min(count, progressBar.Maximum);
                                     StatusBarUpDate(count, progressBar.Maximum);
                                 }
+                                ExportBtn.Enabled = count > 0;
                             }
                         }
                     }
@@ -362,6 +363,7 @@ namespace DomainChecker
 
         private void ExportBtn_Click(object sender, EventArgs e)
         {
+            ExportBtn.Enabled = false;
             SqlExportToCsv();
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
@@ -376,6 +378,7 @@ namespace DomainChecker
                     CsvService.MoveCsv(Path);
                 }
             }
+            ExportBtn.Enabled = true;
         }
         #region SqlExport Services
 

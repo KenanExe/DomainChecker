@@ -35,6 +35,10 @@ namespace DomainChecker
                 var dir = Path.GetDirectoryName(newPath);
                 if (!string.IsNullOrEmpty(dir))
                     Directory.CreateDirectory(dir);
+                if (File.Exists(newPath))
+                {
+                    File.Delete(newPath);
+                }
                 File.Move(CsvPath, newPath);
             }
         }
