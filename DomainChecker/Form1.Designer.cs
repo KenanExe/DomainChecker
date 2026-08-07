@@ -52,6 +52,7 @@
             btnRefrash = new Button();
             statusStrip1 = new StatusStrip();
             AltBarStatus = new ToolStripStatusLabel();
+            ExportBtn = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SpeedScrol).BeginInit();
             groupBox2.SuspendLayout();
@@ -334,11 +335,22 @@
             AltBarStatus.Size = new Size(151, 20);
             AltBarStatus.Text = "toolStripStatusLabel1";
             // 
+            // ExportBtn
+            // 
+            ExportBtn.Location = new Point(989, 12);
+            ExportBtn.Name = "ExportBtn";
+            ExportBtn.Size = new Size(119, 29);
+            ExportBtn.TabIndex = 10;
+            ExportBtn.Text = "Export to CSV";
+            ExportBtn.UseVisualStyleBackColor = true;
+            ExportBtn.Click += ExportBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1226, 629);
+            Controls.Add(ExportBtn);
             Controls.Add(statusStrip1);
             Controls.Add(btnRefrash);
             Controls.Add(groupBox4);
@@ -389,6 +401,7 @@
         private GroupBox groupBox4;
         private Button btnRefrash;
         private StatusStrip statusStrip1;
+        private Button ExportBtn;
         private static ToolStripStatusLabel AltBarStatus;
         public static ProgressBar progressBar;
         public static DataGridView dataQueue;

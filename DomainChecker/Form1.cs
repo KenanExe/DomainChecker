@@ -359,5 +359,59 @@ namespace DomainChecker
             string statusText = $"Queue: {queueCount} / {resultsCount}";
             AltBarStatus.Text = statusText;
         }
+
+        private void ExportBtn_Click(object sender, EventArgs e)
+        {
+            SqlExportToCsv();
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Title = "Select Save Location";
+                saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*";
+                saveFileDialog.DefaultExt = "csv";
+                saveFileDialog.FileName = "Domains check result";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string Path = saveFileDialog.FileName;
+
+                    CsvService.MoveCsv(Path);
+                }
+            }
+        }
+        #region SqlExport Services
+
+        public static void SqlExportToCsv()
+        {
+            string dbPath = ConfigurationManager.AppSettings["DbPath"];
+            try
+            {
+                using (SQLiteConnection m_dbConnection = new SQLiteConnection($"Data Source={dbPath};Version=3;"))
+                {
+                    try
+                    {
+                        string Request = @"SELECT * FROM TblResults";
+                        using (SQLiteCommand command = new SQLiteCommand(Request, m_dbConnection))
+                        {
+                            m_dbConnection.Open();
+                            using (SQLiteDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    CsvService.AddCsv(reader["name"].ToString(), (bool)reader["status"]);
+                                }
+                            }
+                        }
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        LoggingService.Log($"DB Error: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggingService.Log($"System Error: {ex.Message}");
+            }
+        }
+        #endregion
     }
 }
