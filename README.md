@@ -50,4 +50,4 @@ This is an open-source project; pull requests and suggestions are always welcome
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE.txt).
