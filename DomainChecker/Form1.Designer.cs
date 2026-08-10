@@ -53,6 +53,7 @@
             statusStrip1 = new StatusStrip();
             AltBarStatus = new ToolStripStatusLabel();
             ExportBtn = new Button();
+            AutoSpeedCheckBox = new CheckBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SpeedScrol).BeginInit();
             groupBox2.SuspendLayout();
@@ -65,6 +66,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(AutoSpeedCheckBox);
             groupBox1.Controls.Add(lblSpeed);
             groupBox1.Controls.Add(SpeedScrol);
             groupBox1.Controls.Add(label3);
@@ -78,7 +80,7 @@
             groupBox1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             groupBox1.Location = new Point(11, 35);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(246, 344);
+            groupBox1.Size = new Size(246, 366);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Auto TLDs";
@@ -87,7 +89,7 @@
             // 
             lblSpeed.AutoSize = true;
             lblSpeed.Font = new Font("Segoe UI", 9F);
-            lblSpeed.Location = new Point(6, 313);
+            lblSpeed.Location = new Point(38, 338);
             lblSpeed.Name = "lblSpeed";
             lblSpeed.Size = new Size(136, 20);
             lblSpeed.TabIndex = 10;
@@ -97,7 +99,7 @@
             // 
             SpeedScrol.BackColor = SystemColors.Control;
             SpeedScrol.LargeChange = 1;
-            SpeedScrol.Location = new Point(6, 268);
+            SpeedScrol.Location = new Point(0, 302);
             SpeedScrol.Minimum = 1;
             SpeedScrol.Name = "SpeedScrol";
             SpeedScrol.Size = new Size(234, 56);
@@ -208,7 +210,7 @@
             btnStart.FlatStyle = FlatStyle.Flat;
             btnStart.Font = new Font("Segoe UI Black", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 162);
             btnStart.ForeColor = SystemColors.ControlLightLight;
-            btnStart.Location = new Point(11, 403);
+            btnStart.Location = new Point(11, 427);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(246, 67);
             btnStart.TabIndex = 2;
@@ -219,12 +221,13 @@
             // progressBar
             // 
             progressBar.BackColor = SystemColors.Control;
-            progressBar.Location = new Point(11, 481);
+            progressBar.Location = new Point(11, 500);
             progressBar.Name = "progressBar";
             progressBar.Size = new Size(246, 29);
             progressBar.TabIndex = 3;
             progressBar.UseWaitCursor = true;
             progressBar.Value = 50;
+            progressBar.Click += progressBar_Click;
             // 
             // btnThema
             // 
@@ -345,6 +348,17 @@
             ExportBtn.UseVisualStyleBackColor = true;
             ExportBtn.Click += ExportBtn_Click;
             // 
+            // AutoSpeedCheckBox
+            // 
+            AutoSpeedCheckBox.AutoSize = true;
+            AutoSpeedCheckBox.Location = new Point(6, 269);
+            AutoSpeedCheckBox.Name = "AutoSpeedCheckBox";
+            AutoSpeedCheckBox.Size = new Size(121, 27);
+            AutoSpeedCheckBox.TabIndex = 11;
+            AutoSpeedCheckBox.Text = "Auto Speed";
+            AutoSpeedCheckBox.UseVisualStyleBackColor = true;
+            AutoSpeedCheckBox.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -401,10 +415,11 @@
         private GroupBox groupBox4;
         private Button btnRefrash;
         private StatusStrip statusStrip1;
-        public  static Button ExportBtn;
+        private static CheckBox AutoSpeedCheckBox;
+        public static Button ExportBtn;
         private static ToolStripStatusLabel AltBarStatus;
-        public  static ProgressBar progressBar;
-        public  static DataGridView dataQueue;
-        public  static DataGridView dataResults;
+        public static ProgressBar progressBar;
+        public static DataGridView dataQueue;
+        public static DataGridView dataResults;
     }
 }

@@ -6,6 +6,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using static DomainChecker.Form1;
 
 namespace DomainChecker
@@ -15,9 +16,19 @@ namespace DomainChecker
         static bool DebugMode = ConfigurationManager.AppSettings["DebugMode"] == "true";
         public static async Task<bool> StartCheckingLoopAsync()
         {
+            Stopwatch RdapTime = new Stopwatch();
             while (true)
             {
-                int time = GetSpeed();
+                bool autoSpeed = GetAutoSpeed();
+                int time = 0;
+                if (autoSpeed)
+                {
+                    RdapTime.Restart();
+                }
+                else
+                {
+                    time = GetSpeed();
+                }
                 bool result = await StartCheckingAsync();
                 if (!result)
                 {
@@ -25,13 +36,26 @@ namespace DomainChecker
                 }
                 DataResultsUpDate();
                 DataQueueUpDate();
-                await Task.Delay(time); // I still learning async/await
+                if (autoSpeed)
+                {
+                    RdapTime.Stop();
+                    int TaskTime = (int)RdapTime.ElapsedMilliseconds;
+                    if (TaskTime < 1010)
+                    {
+                        time = 1010 - TaskTime;
+                    }
+                    else
+                    {
+                        time = 10;
+                    }
+                }
+
+                await Task.Delay(time);
             }
             DataResultsUpDate();
             DataQueueUpDate();
             return true;
         }
-
         public static async Task<bool> StartCheckingAsync()
         {
             string dbPath = ConfigurationManager.AppSettings["DbPath"];

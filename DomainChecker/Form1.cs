@@ -29,6 +29,13 @@ namespace DomainChecker
             btnRefrash.PerformClick();
         }
         static int speed = 1000;
+        static bool AutoSpeed = false;
+        static public bool GetAutoSpeed()
+        {
+            return AutoSpeed;
+        }
+
+
         static public int GetSpeed()
         {
             return speed;
@@ -416,5 +423,15 @@ namespace DomainChecker
             }
         }
         #endregion
+
+        private static void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            AutoSpeed = AutoSpeedCheckBox.Checked;
+        }
+
+        private void progressBar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
