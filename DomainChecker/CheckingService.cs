@@ -20,7 +20,7 @@ namespace DomainChecker
             while (true)
             {
                 bool autoSpeed = GetAutoSpeed();
-                int time = 0;
+                int time = 100;
                 if (autoSpeed)
                 {
                     RdapTime.Restart();
@@ -49,7 +49,8 @@ namespace DomainChecker
                         time = 10;
                     }
                 }
-
+                LoggingService.Log($"Next check in {time} ms");
+                LoggingService.Log($"Rdap check time: {RdapTime.ElapsedMilliseconds} ms");
                 await Task.Delay(time);
             }
             DataResultsUpDate();
