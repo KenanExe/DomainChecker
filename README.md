@@ -17,7 +17,7 @@ Import your bulk domain list into the app and instantly find out domain availabi
 
 1. Clone the repository or download it as a `.zip`:
 ```bash
-   git clone https://github.com/yourusername/DomainChecker.git
+   git clone https://github.com/KenanExe/DomainChecker.git
 ```
 
 2. Open `DomainChecker.sln` with Visual Studio (2022 or later).
@@ -50,4 +50,4 @@ This is an open-source project; pull requests and suggestions are always welcome
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE.txt).
+This project is licensed under the <a href="LICENSE.txt" target="_blank"><img src="https://img.shields.io/github/license/kenanexe/DomainChecker"></a>.
