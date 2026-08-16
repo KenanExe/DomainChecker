@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            AutoSpeedCheckBox = new CheckBox();
             lblSpeed = new Label();
             SpeedScrol = new TrackBar();
             label3 = new Label();
@@ -53,7 +54,6 @@
             statusStrip1 = new StatusStrip();
             AltBarStatus = new ToolStripStatusLabel();
             ExportBtn = new Button();
-            AutoSpeedCheckBox = new CheckBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SpeedScrol).BeginInit();
             groupBox2.SuspendLayout();
@@ -84,6 +84,17 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Auto TLDs";
+            // 
+            // AutoSpeedCheckBox
+            // 
+            AutoSpeedCheckBox.AutoSize = true;
+            AutoSpeedCheckBox.Location = new Point(6, 269);
+            AutoSpeedCheckBox.Name = "AutoSpeedCheckBox";
+            AutoSpeedCheckBox.Size = new Size(121, 27);
+            AutoSpeedCheckBox.TabIndex = 11;
+            AutoSpeedCheckBox.Text = "Auto Speed";
+            AutoSpeedCheckBox.UseVisualStyleBackColor = true;
+            AutoSpeedCheckBox.CheckedChanged += this.checkBox1_CheckedChanged;
             // 
             // lblSpeed
             // 
@@ -251,7 +262,7 @@
             groupBox2.Size = new Size(246, 344);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Doamin List (input)";
+            groupBox2.Text = "Domain List (input)";
             // 
             // textBox1
             // 
@@ -348,17 +359,6 @@
             ExportBtn.UseVisualStyleBackColor = true;
             ExportBtn.Click += ExportBtn_Click;
             // 
-            // AutoSpeedCheckBox
-            // 
-            AutoSpeedCheckBox.AutoSize = true;
-            AutoSpeedCheckBox.Location = new Point(6, 269);
-            AutoSpeedCheckBox.Name = "AutoSpeedCheckBox";
-            AutoSpeedCheckBox.Size = new Size(121, 27);
-            AutoSpeedCheckBox.TabIndex = 11;
-            AutoSpeedCheckBox.Text = "Auto Speed";
-            AutoSpeedCheckBox.UseVisualStyleBackColor = true;
-            AutoSpeedCheckBox.CheckedChanged += checkBox1_CheckedChanged;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -415,11 +415,11 @@
         private GroupBox groupBox4;
         private Button btnRefrash;
         private StatusStrip statusStrip1;
-        private static CheckBox AutoSpeedCheckBox;
-        public static Button ExportBtn;
-        private static ToolStripStatusLabel AltBarStatus;
-        public static ProgressBar progressBar;
-        public static DataGridView dataQueue;
-        public static DataGridView dataResults;
+        private CheckBox AutoSpeedCheckBox;
+        public Button ExportBtn;
+        private ToolStripStatusLabel AltBarStatus;
+        public ProgressBar progressBar;
+        public DataGridView dataQueue;
+        public DataGridView dataResults;
     }
 }
